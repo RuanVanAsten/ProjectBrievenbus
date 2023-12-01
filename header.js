@@ -17,7 +17,9 @@ class HeaderComponent extends HTMLElement {
           position:fixed;
           top: 0;
           padding: 10px;
+              
         }
+        
       </style>
       <div id="header">
         <h1>Your Website</h1>

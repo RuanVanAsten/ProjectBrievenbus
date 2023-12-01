@@ -10,15 +10,13 @@ class LoginComponent extends HTMLElement {
      <style>
     :host {
     font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
+  
     display: flex;
     align-items: center;
     justify-content: center;
     height: 100vh;
     background-color: #f4f4f4;
-}
-
+  }
 .container {
     text-align: center;
     background-color: #fff;
