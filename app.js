@@ -1,123 +1,60 @@
-class LoginComponent extends HTMLElement {
-  constructor() {
-    super();
+import "./footer.js"
+import "./header.js"
+import "./login.js"
+import "./register.js"
 
-    // Creëer een Shadow DOM
-    this.attachShadow({ mode: 'open' });
+class app extends HTMLElement
+{
+    constructor(){
+        super()
+        const shadow = this.attachShadow({mode: "open"}) // zorgt ervoor dart het component een afgeschermde stijl kan hebben
+        shadow.append(template.content.cloneNode(true))
 
-    // Voeg stijlen toe aan het Shadow DOM
-    this.shadowRoot.innerHTML = `
-     <style>
-    :host {
-    font-family: Arial, sans-serif;
-  
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    background-color: #f4f4f4;
-  }
-.container {
-    text-align: center;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-}
+        this.cachedPages = [];
+        this.currentPage = "";
+        this.mainPage = this.shadowRoot.querySelector("#mainPage");
+    }
 
-.logo {
-    width: 100px;
-    margin-bottom: 20px;
-}
+    ChangePageEvent(e){
+        console.log("btnPress Received " + e.detail);
 
-.form-container {
-    max-width: 300px;
-    margin: 0 auto;
-}
+        this.showPages(e.detail);
+    }
 
-label {
-    display: block;
-    margin-bottom: 8px;
-}
+    connectedCallback(){
+        this.addEventListener("ChangePageEvent", this.ChangePageEvent);
+    }
 
-input {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 16px;
-    box-sizing: border-box;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
+    showPages(page)
+    {
 
-button {
-    background-color: #4caf50;
-    color: #fff;
-    padding: 10px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
+        for(let oldPage of this.cachedPages){
+                this.shadowRoot.querySelector(`#${oldPage}`).style.display = "none";
+                
+        }
 
-button:hover {
-    background-color: #45a049;
-}
+        if(this.cachedPages.indexOf(page) !== -1){
+            console.log("i already cached! " + page)
+            
+            this.shadowRoot.querySelector(`#${page}`).style.display = "block";
 
-p {
-    margin-top: 16px;
-}
 
-a {
-    color: #007bff;
-    text-decoration: none;
-}
+        }
+        else{
+            this.cachedPages.push(page) 
+            console.log(`the ${page} has been chached`)
+            
+            let newPage = document.createElement(`${page}-comp`);
+            newPage.setAttribute("id", page)
 
-a:hover {
-    text-decoration: underline;
-}
-    </style>
+            this.mainPage.append(newPage)
+
+        }
+        console.log(this.cachedPages);
+
+        
+    }
     
-    
-<div class="container">
-<img src="pigeon.jpg" alt="Logo" class="logo">
-  <div class="form-container">
-    <label for="email">Email:</label>
-    <input type="email" id="email" placeholder="Enter your email" required>
-
-    <label for="password">Password:</label>
-    <input type="password" id="password" placeholder="Enter your password" required>
-
-    <button id="loginButton">Inloggen</button>
-
-    <p>Don't have an account? <a href="....">Register</a></p>
-  </div>
-</div>
-    `;
-  }
-
-  // Wordt aangeroepen wanneer het element aan het DOM wordt toegevoegd
-  connectedCallback() {
-    // Voeg een click-eventlistener toe aan de inlogknop
-    this.shadowRoot.getElementById('loginButton').addEventListener('click', () => {
-      // Voeg hier inlogfunctionaliteit toe
-      this.login();
-    });
-  }
-
-  // Inlogfunctionaliteit
-  login() {
-    const emailInput = this.shadowRoot.getElementById('email');
-    const passwordInput = this.shadowRoot.getElementById('password');
-
-    const email = emailInput.value;
-    const password = passwordInput.value;
-
-    // Voeg hier de daadwerkelijke inlogfunctionaliteit toe
-    // Bijvoorbeeld: maak een API-aanroep, navigeer naar een andere pagina, etc.
-
-    // Simpel voorbeeld: Toon de ingevoerde gegevens in de console
-    console.log(`Inlogpoging - E-mail: ${email}, Wachtwoord: ${password}`);
-  }
 }
 
-// Registreer het aangepaste inlogcomponent
-customElements.define('login-component', LoginComponent);
+customElements.define('app-comp', app)
