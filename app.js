@@ -6,18 +6,22 @@ import "./register.js"
 
 const template = document.createElement("template");
 template.innerHTML = /*html*/ ` 
-    <header-component></header-component>
+    <div id="mainPage">
+        <header-component></header-component>
     
-    <login-component></login-component>
-    <register-component></register-component>
-    <footer-component></footer-component>
+        <contact-component></contact-component>
+    
+        <footer-component></footer-component>
+    </div>
+
+   
 `;
 
 
 
 
 class app extends HTMLElement
-{
+{   
     constructor(){
         super()
         const shadow = this.attachShadow({mode: "open"}) // zorgt ervoor dart het component een afgeschermde stijl kan hebben
@@ -40,9 +44,9 @@ class app extends HTMLElement
 
     showPages(page)
     {
-
+        console.log(page);
         for(let oldPage of this.cachedPages){
-                this.shadowRoot.querySelector(`#${oldPage}`).style.display = "none";
+                this.shadowRoot.querySelector("<login-component></login-component>").style.display = "none";
                 
         }
 
@@ -55,7 +59,7 @@ class app extends HTMLElement
         }
         else{
             this.cachedPages.push(page) 
-            console.log(`the ${page} has been chached`)
+            console.log(`${page}`)
             
             let newPage = document.createElement(`${page}-comp`);
             newPage.setAttribute("id", page)

@@ -88,6 +88,7 @@ template.innerHTML = /*html*/`
     </div>
   </div>
       `;
+
 class RegisterComponent extends HTMLElement {
     constructor() {
       super();
@@ -125,4 +126,4 @@ class RegisterComponent extends HTMLElement {
   }
   
   // Registreer het aangepaste inlogcomponent
-  customElements.define('register-component', RegisterComponent);
+  customElements.define('register-comp', RegisterComponent);

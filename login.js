@@ -85,31 +85,46 @@ template.innerHTML = /*html*/`
   
       <button id="loginButton">Inloggen</button>
   
-      <p>Don't have an account? <span id="registerknop">Register</span></p>
+      <p>Don't have an account? <button id="register">Register</button></p>
     </div>
   </div>
       `;
 
 class LoginComponent extends HTMLElement {
-    constructor() {
-      super();
-  
-      // Creëer e en Shadow DOM
-     const shadow= this.attachShadow({ mode: 'open' });
-     shadow.appendChild(template.content.cloneNode(true));
-  
-      // Voeg stijlen toe aan het Shadow DOM
-      
-    }
+  constructor() {
+    super();
+
+    // Creëer e en Shadow DOM
+    const shadow= this.attachShadow({ mode: 'open' });
+    shadow.appendChild(template.content.cloneNode(true));
+
+    this.button = this.shadowRoot.querySelectorAll("button");
+
+    // Voeg stijlen toe aan het Shadow DOM
+    
+  }
   
     // Wordt aangeroepen wanneer het element aan het DOM wordt toegevoegd
-    connectedCallback() {
-      // Voeg een click-eventlistener toe aan de inlogknop
-      this.shadowRoot.getElementById('loginButton').addEventListener('click', () => {
-        // Voeg hier inlogfunctionaliteit toe
-        this.login();
-      });
-    }
+  connectedCallback() 
+  {
+    // Voeg een click-eventlistener toe aan de inlogknop
+    this.shadowRoot.getElementById('loginButton').addEventListener('click', () => {
+      // Voeg hier inlogfunctionaliteit toe
+    this.login();
+    });
+    this.register();
+    
+  }
+  ChanePageEvent(id) {
+    this.dispatchEvent(new CustomEvent("ChangePageEvent", {
+      bubbles: true,
+      composed: true,
+      detail: id
+
+    }))
+
+  }
+
   
     // Inlogfunctionaliteit
     login() {
@@ -119,12 +134,23 @@ class LoginComponent extends HTMLElement {
       const email = emailInput.value;
       const password = passwordInput.value;
   
-      // Voeg hier de daadwerkelijke inlogfunctionaliteit toe
-      // Bijvoorbeeld: maak een API-aanroep, navigeer naar een andere pagina, etc.
-  
-      // Simpel voorbeeld: Toon de ingevoerde gegevens in de console
+     
+      
       console.log(`Inlogpoging - E-mail: ${email}, Wachtwoord: ${password}`);
     }
+
+    register(){
+      this.button.forEach(btn => {
+        btn.addEventListener('mousedown', (e)=>{
+          this.button.forEach(btn=>{
+            btn.classList.remove("active");
+          })
+          btn.classList.toggle("active");
+          this.ChanePageEvent(btn.getAttribute("id"));
+        })
+      });
+    }
+
   }
   
   // Registreer het aangepaste inlogcomponent
