@@ -2,14 +2,14 @@ import "./footer.js"
 import "./header.js"
 import "./login.js"
 import "./register.js"
+import "./postHistory.js"
 
 
 const template = document.createElement("template");
-template.innerHTML = /*html*/ ` 
+template.innerHTML = /*html*/ `
     <header-component></header-component>
-    
-    <login-component></login-component>
-    <register-component></register-component>
+    <postHistory-component></postHistory-component>
+
     <footer-component></footer-component>
 `;
 
