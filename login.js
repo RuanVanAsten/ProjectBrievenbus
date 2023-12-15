@@ -1,12 +1,5 @@
-class LoginComponent extends HTMLElement {
-    constructor() {
-      super();
-  
-      // Creëer een Shadow DOM
-      this.attachShadow({ mode: 'open' });
-  
-      // Voeg stijlen toe aan het Shadow DOM
-      this.shadowRoot.innerHTML = `
+const template = document.createElement("template");
+template.innerHTML = `
        <style>
       :host {
       font-family: Arial, sans-serif;
@@ -74,6 +67,10 @@ class LoginComponent extends HTMLElement {
   a:hover {
       text-decoration: underline;
   }
+  #registerknop
+  {
+    color: blue;
+  }
       </style>
       
       
@@ -88,10 +85,21 @@ class LoginComponent extends HTMLElement {
   
       <button id="loginButton">Inloggen</button>
   
-      <p>Don't have an account? <a href="....">Register</a></p>
+      <p>Don't have an account? <span id="registerknop">Register</span></p>
     </div>
   </div>
       `;
+
+class LoginComponent extends HTMLElement {
+    constructor() {
+      super();
+  
+      // Creëer e en Shadow DOM
+     const shadow= this.attachShadow({ mode: 'open' });
+     shadow.appendChild(template.content.cloneNode(true));
+  
+      // Voeg stijlen toe aan het Shadow DOM
+      
     }
   
     // Wordt aangeroepen wanneer het element aan het DOM wordt toegevoegd

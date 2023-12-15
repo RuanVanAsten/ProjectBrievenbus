@@ -1,12 +1,5 @@
-class RegisterComponent extends HTMLElement {
-    constructor() {
-      super();
-  
-      // Creëer een Shadow DOM
-      this.attachShadow({ mode: 'open' });
-  
-      // Voeg stijlen toe aan het Shadow DOM
-      this.shadowRoot.innerHTML = `
+const template = document.createElement("template");
+template.innerHTML = `
        <style>
       :host {
       font-family: Arial, sans-serif;
@@ -95,14 +88,23 @@ class RegisterComponent extends HTMLElement {
     </div>
   </div>
       `;
+class RegisterComponent extends HTMLElement {
+    constructor() {
+      super();
+  
+     
+      const shadow = this.attachShadow({ mode: 'open' });
+      shadow.appendChild(template.content.cloneNode(true));
+      
+      
     }
   
-    // Wordt aangeroepen wanneer het element aan het DOM wordt toegevoegd
+   
     connectedCallback() {
-      // Voeg een click-eventlistener toe aan de inlogknop
+      // Voeg een click-eventlistener toe aan de registerknop
       this.shadowRoot.getElementById('registerButton').addEventListener('click', () => {
-        // Voeg hier inlogfunctionaliteit toe
-        this.login();
+        // Voeg hier registerfunctie toe
+        this.register();
       });
     }
   
