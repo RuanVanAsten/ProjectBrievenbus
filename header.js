@@ -17,12 +17,12 @@ class HeaderComponent extends HTMLElement {
           position:fixed;
           top: 0;
           padding: 10px;
-              
+          height: 100px
         }
-        
+
       </style>
       <div id="header">
-        <h1>Your Website</h1>
+        <h1>Package Pigeon</h1>
         <nav>
           <a href="#">Home</a>
           <a href="#">About</a>

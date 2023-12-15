@@ -2,9 +2,11 @@ import "./footer.js"
 import "./header.js"
 import "./login.js"
 import "./register.js"
+import "./postHistory.js"
 
 
 const template = document.createElement("template");
+
 template.innerHTML = /*html*/ ` 
     <div id="mainPage">
         <header-component></header-component>
@@ -15,6 +17,7 @@ template.innerHTML = /*html*/ `
     </div>
 
    
+
 `;
 
 
