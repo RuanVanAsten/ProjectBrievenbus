@@ -1,5 +1,5 @@
 const template = document.createElement("template");
-template.innerHTML = `
+template.innerHTML = /*html*/`
        <style>
       :host {
       font-family: Arial, sans-serif;
@@ -84,7 +84,7 @@ template.innerHTML = `
 
       <button id="registerButton">Register</button>
   
-      <p>Yoou already have an account? <a href="....">Login</a></p>
+      <p>Yoou already have an account? <button id="loginbtn">Login</button></p>
     </div>
   </div>
       `;
