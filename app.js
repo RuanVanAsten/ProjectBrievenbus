@@ -7,16 +7,15 @@ import "./postHistory.js"
 
 const template = document.createElement("template");
 
-template.innerHTML = /*html*/ ` 
+template.innerHTML = /*html*/ `
     <div id="mainPage">
         <header-component></header-component>
-    
+
         <contact-component></contact-component>
-    
+
         <footer-component></footer-component>
     </div>
-
-   
+<postHistory-component></postHistory-component>
 
 `;
 
