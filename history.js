@@ -55,7 +55,7 @@ template.innerHTML = `
   </div>
 `;
 
-class PostHistoryComponent extends HTMLElement {
+class app extends HTMLElement {
   constructor() {
     super();
     const shadow = this.attachShadow({ mode: 'open' });
@@ -184,4 +184,4 @@ class PostHistoryComponent extends HTMLElement {
   }
 }
 
-customElements.define('posthistory-component', PostHistoryComponent);
+customElements.define('history-comp', app);

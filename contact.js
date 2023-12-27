@@ -18,8 +18,6 @@ template.innerHTML = /*html*/`
       padding: 20px;
   }
   
- 
-  
   .form-container {
       max-width: 300px;
       margin: 0 auto;
@@ -53,7 +51,7 @@ template.innerHTML = /*html*/`
   </div>
       `;
 
-class LoginComponent extends HTMLElement {
+class app extends HTMLElement {
     constructor() {
         super();
 
@@ -90,4 +88,4 @@ class LoginComponent extends HTMLElement {
 }
 
 // Registreer het aangepaste inlogcomponent
-customElements.define('login-component', LoginComponent);
+customElements.define('contact-comp', app);

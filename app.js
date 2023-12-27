@@ -2,20 +2,18 @@ import "./footer.js"
 import "./header.js"
 import "./login.js"
 import "./register.js"
-import "./postHistory.js"
+import "./history.js"
+import "./contact.js"
 
 
 const template = document.createElement("template");
 
 template.innerHTML = /*html*/ `
+    <header-comp></header-comp>
+    <footer-comp></footer-comp>
     <div id="mainPage">
-        <header-component></header-component>
-
-        <contact-component></contact-component>
-
-        <footer-component></footer-component>
+       
     </div>
-<postHistory-component></postHistory-component>
 
 `;
 
@@ -48,17 +46,17 @@ class app extends HTMLElement
     {
         console.log(page);
         for(let oldPage of this.cachedPages){
-                this.shadowRoot.querySelector("<login-component></login-component>").style.display = "none";
-                
-        }
-
-        if(this.cachedPages.indexOf(page) !== -1){
-            console.log("i already cached! " + page)
+            this.shadowRoot.querySelector(`#${oldPage}`).style.display = "none";
             
-            this.shadowRoot.querySelector(`#${page}`).style.display = "block";
+    }
+
+    if(this.cachedPages.indexOf(page) !== -1){
+        console.log("i already cached! " + page)
+        
+        this.shadowRoot.querySelector(`#${page}`).style.display = "block";
 
 
-        }
+    }
         else{
             this.cachedPages.push(page) 
             console.log(`${page}`)

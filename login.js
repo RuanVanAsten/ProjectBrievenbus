@@ -90,7 +90,7 @@ template.innerHTML = /*html*/`
   </div>
       `;
 
-class LoginComponent extends HTMLElement {
+class app extends HTMLElement {
   constructor() {
     super();
 
@@ -154,4 +154,4 @@ class LoginComponent extends HTMLElement {
   }
   
   // Registreer het aangepaste inlogcomponent
-  customElements.define('login-component', LoginComponent);
+  customElements.define('login-comp', app);

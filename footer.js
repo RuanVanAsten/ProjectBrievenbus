@@ -1,4 +1,4 @@
-class FooterComponent extends HTMLElement {
+class app extends HTMLElement {
     constructor() {
         super();
 
@@ -27,4 +27,4 @@ class FooterComponent extends HTMLElement {
 }
 
 // Registreer het aangepaste footercomponent
-customElements.define('footer-component', FooterComponent);
+customElements.define('footer-comp', app);
