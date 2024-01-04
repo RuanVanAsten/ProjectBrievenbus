@@ -4,21 +4,20 @@ import "./login.js"
 import "./register.js"
 import "./history.js"
 import "./contact.js"
+import "./home.js"
 
 
 const template = document.createElement("template");
 
 template.innerHTML = /*html*/ `
     <header-comp></header-comp>
+   
     <footer-comp></footer-comp>
+    
     <div id="mainPage">
        
     </div>
-
 `;
-
-
-
 
 class app extends HTMLElement
 {   

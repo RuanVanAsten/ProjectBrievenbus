@@ -68,8 +68,7 @@ class app extends HTMLElement {
     // Wordt aangeroepen wanneer het element aan het DOM wordt toegevoegd
     connectedCallback() {
         // Voeg een click-eventlistener toe aan de inlogknop
-       
-    
+      
 
     }
     ChanePageEvent(id) {

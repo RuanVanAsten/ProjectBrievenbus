@@ -22,11 +22,10 @@ template.innerHTML = /*html*/`
 <nav>
 <button id="login">Login</button>
 <button id="register">Register</button>
-
-  <button id="home">Home</button>
-  <button id="history">History</button>
-  <button id="contact">Contact</button
-<nav>
+<button id="home">Home</button>
+<button id="history">History</button>
+<button id="contact">Contact</button
+</nav>
 </div>
 
 
