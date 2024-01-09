@@ -6,7 +6,7 @@ class app extends HTMLElement {
         this.attachShadow({ mode: 'open' });
 
         // Voeg stijlen toe aan het Shadow DOM
-        this.shadowRoot.innerHTML = `
+        this.shadowRoot.innerHTML = /*html*/`
       <style>
         :host {
           display: block;

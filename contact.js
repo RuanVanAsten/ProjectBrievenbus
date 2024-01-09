@@ -61,13 +61,13 @@ class app extends HTMLElement {
 
         this.button = this.shadowRoot.querySelectorAll("button");
 
-        // Voeg stijlen toe aan het Shadow DOM
+       
 
     }
 
-    // Wordt aangeroepen wanneer het element aan het DOM wordt toegevoegd
+   
     connectedCallback() {
-        // Voeg een click-eventlistener toe aan de inlogknop
+       
       
 
     }
@@ -82,9 +82,9 @@ class app extends HTMLElement {
     }
 
 
-    // Inlogfunctionaliteit
+   
     
 }
 
-// Registreer het aangepaste inlogcomponent
+
 customElements.define('contact-comp', app);

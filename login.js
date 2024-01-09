@@ -95,7 +95,7 @@ class app extends HTMLElement {
   constructor() {
     super();
 
-    // CreÃ«er e en Shadow DOM
+    
     const shadow= this.attachShadow({ mode: 'open' });
     shadow.appendChild(template.content.cloneNode(true));
 
@@ -105,12 +105,12 @@ class app extends HTMLElement {
     
   }
   
-    // Wordt aangeroepen wanneer het element aan het DOM wordt toegevoegd
+  
   connectedCallback() 
   {
-    // Voeg een click-eventlistener toe aan de inlogknop
+   
     this.shadowRoot.getElementById('loginButton').addEventListener('click', () => {
-      // Voeg hier inlogfunctionaliteit toe
+  
     this.login();
     });
 
@@ -170,5 +170,5 @@ class app extends HTMLElement {
 
 
   
-  // Registreer het aangepaste inlogcomponent
+  
   customElements.define('login-comp', app);

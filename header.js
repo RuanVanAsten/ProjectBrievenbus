@@ -38,7 +38,7 @@ class app extends HTMLElement {
   constructor(){
     super();
 
-    this.shadow = this.attachShadow({mode: "open"}) // zorgt ervoor dart het component een afgeschermde stijl kan hebben
+    this.shadow = this.attachShadow({mode: "open"}) 
     this.shadow.append(template.content.cloneNode(true))
     
     this.button = this.shadowRoot.querySelectorAll("button")
@@ -64,7 +64,7 @@ class app extends HTMLElement {
     }
 }
 
-// Registreer het aangepaste headercomponent
+
 customElements.define('header-comp', app);
 
 

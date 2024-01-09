@@ -1,5 +1,5 @@
 const template = document.createElement("template");
-template.innerHTML = `
+template.innerHTML = /*html*/`
   <style>
     :host {
       font-family: Arial, sans-serif;
@@ -137,13 +137,13 @@ class app extends HTMLElement {
 
   clearDateInput() {
     const dateInput = this.shadowRoot.getElementById('dateInput');
-    dateInput.value = ''; // Clear the date input
+    dateInput.value = ''; 
 
     const selectElement = this.shadowRoot.getElementById('deliverySelect');
     const options = selectElement.options;
 
     for (let i = 0; i < options.length; i++) {
-      options[i].style.display = ''; // Show all options
+      options[i].style.display = ''; 
     }
 
     this.populateSelect(selectElement)

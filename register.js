@@ -102,9 +102,9 @@ class app extends HTMLElement {
   
    
     connectedCallback() {
-      // Voeg een click-eventlistener toe aan de registerknop
+     
       this.shadowRoot.getElementById('registerButton').addEventListener('click', () => {
-        // Voeg hier registerfunctie toe
+       
         this.register();
       });
     }
@@ -148,5 +148,5 @@ class app extends HTMLElement {
     };
   }
   
-  // Registreer het aangepaste inlogcomponent
+  
 customElements.define('register-comp', app);

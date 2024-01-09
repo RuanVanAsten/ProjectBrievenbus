@@ -23,7 +23,7 @@ class app extends HTMLElement
 {   
     constructor(){
         super()
-        const shadow = this.attachShadow({mode: "open"}) // zorgt ervoor dart het component een afgeschermde stijl kan hebben
+        const shadow = this.attachShadow({mode: "open"}) 
         shadow.append(template.content.cloneNode(true))
 
         this.cachedPages = [];
