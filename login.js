@@ -1,3 +1,4 @@
+
 const template = document.createElement("template");
 template.innerHTML = /*html*/`
        <style>
@@ -94,7 +95,7 @@ class app extends HTMLElement {
   constructor() {
     super();
 
-    // Creëer e en Shadow DOM
+    // CreÃ«er e en Shadow DOM
     const shadow= this.attachShadow({ mode: 'open' });
     shadow.appendChild(template.content.cloneNode(true));
 
@@ -112,7 +113,8 @@ class app extends HTMLElement {
       // Voeg hier inlogfunctionaliteit toe
     this.login();
     });
-    this.register();
+
+      this.register();   
     
   }
   ChanePageEvent(id) {
@@ -126,32 +128,47 @@ class app extends HTMLElement {
   }
 
   
-    // Inlogfunctionaliteit
-    login() {
+    // Inlog
+    async login() {
       const emailInput = this.shadowRoot.getElementById('email');
       const passwordInput = this.shadowRoot.getElementById('password');
-  
+    
       const email = emailInput.value;
       const password = passwordInput.value;
-  
-     
-      
-      console.log(`Inlogpoging - E-mail: ${email}, Wachtwoord: ${password}`);
+    
+      const url = 'http://linuxmpk.northeurope.cloudapp.azure.com:3000/login';
+    
+      const data = {
+        username: email,
+        password: password
+      };
+    
+      try {
+        const response = await fetch(url, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        });
+    
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+    
+        const responseData = await response.text();
+        console.log('Login successful:', responseData);
+        
+      } catch (error) {
+        console.error('There was a problem with the login:', error);
+
+      }
+    }
+    
+    
     }
 
-    register(){
-      this.button.forEach(btn => {
-        btn.addEventListener('mousedown', (e)=>{
-          this.button.forEach(btn=>{
-            btn.classList.remove("active");
-          })
-          btn.classList.toggle("active");
-          this.ChanePageEvent(btn.getAttribute("id"));
-        })
-      });
-    }
 
-  }
   
   // Registreer het aangepaste inlogcomponent
   customElements.define('login-comp', app);

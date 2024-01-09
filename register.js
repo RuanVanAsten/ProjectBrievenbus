@@ -109,21 +109,44 @@ class app extends HTMLElement {
       });
     }
   
-    // Inlogfunctionaliteit
-    register() {
+    //register
+    async register() {
+    
       const emailInput = this.shadowRoot.getElementById('email');
       const passwordInput = this.shadowRoot.getElementById('password');
   
       const email = emailInput.value;
       const password = passwordInput.value;
   
-      // Voeg hier de daadwerkelijke inlogfunctionaliteit toe
-      // Bijvoorbeeld: maak een API-aanroep, navigeer naar een andere pagina, etc.
+      const url = 'http://linuxmpk.northeurope.cloudapp.azure.com:3000/register';
   
-      // Simpel voorbeeld: Toon de ingevoerde gegevens in de console
-      console.log(`Registerpoging - E-mail: ${email}, Wachtwoord: ${password}`);
-    }
+      const data = {
+        username: email,
+        password: password
+      };
+  
+      try {
+        const response = await fetch(url, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        });
+  
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+  
+        const responseData = await response.text();
+        console.log('Registration successful:', responseData);
+        // Voer verdere acties uit na een succesvolle registratie
+      } catch (error) {
+        console.error('There was a problem with the registration:', error);
+        // Behandel fouten of geef meldingen weer voor de gebruiker bij een mislukte registratie
+      }
+    };
   }
   
   // Registreer het aangepaste inlogcomponent
-  customElements.define('register-comp', app);
+customElements.define('register-comp', app);
