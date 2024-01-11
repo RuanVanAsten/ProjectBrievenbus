@@ -46,8 +46,6 @@ class app extends HTMLElement {
         this.button = this.shadowRoot.querySelectorAll("button")
 
         this.isAuthenticated = false;
-
-        // Luister naar het "InlogStatusChanged" event
         document.addEventListener("InlogStatusChanged", (event) => {
         this.isAuthenticated = event.detail;
         });

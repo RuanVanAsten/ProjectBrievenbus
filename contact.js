@@ -1,4 +1,3 @@
-
 const template = document.createElement("template");
 template.innerHTML = /*html*/`
   <style>
@@ -98,7 +97,7 @@ class app extends HTMLElement {
   constructor() {
     super();
 
-    // Creëer en Shadow DOM
+    // CreÃ«er en Shadow DOM
     const shadow = this.attachShadow({ mode: 'open' });
     shadow.appendChild(template.content.cloneNode(true));
 
@@ -106,20 +105,9 @@ class app extends HTMLElement {
     this.shadowRoot.getElementById('submitBtn').addEventListener('click', this.handleSubmit.bind(this));
   }
 
-<<<<<<< HEAD
   handleSubmit() {
     const form = this.shadowRoot.getElementById('contactForm');
     const formData = new FormData(form);
-=======
-   
-    connectedCallback() {
-    }
-    ChangePageEvent(id) {
-        this.dispatchEvent(new CustomEvent("ChangePageEvent", {
-            bubbles: true,
-            composed: true,
-            detail: id
->>>>>>> 337bd4c8c61aadd3a4a193dc82d96781e26d46fe
 
     const name = formData.get('name');
     const email = formData.get('email');
