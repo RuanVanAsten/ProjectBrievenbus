@@ -52,7 +52,7 @@ class app extends HTMLElement
     if(this.cachedPages.indexOf(page) !== -1){
         console.log("i already cached! " + page)
         
-        this.shadowRoot.querySelector(`#${page}`).style.display = "block";
+        this.shadowRoot.querySelector(`#${page}`).style.display = "flex";
 
 
     }
@@ -70,6 +70,8 @@ class app extends HTMLElement
 
         
     }
+
+    
     
 }
 

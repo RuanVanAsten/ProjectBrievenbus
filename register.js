@@ -16,6 +16,7 @@ template.innerHTML = /*html*/`
       border-radius: 8px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       padding: 20px;
+      margin-top: 80px;
   }
   
   .logo {
@@ -43,16 +44,16 @@ template.innerHTML = /*html*/`
   }
   
   button {
-      background-color: #4caf50;
+      background-color: #555;
       color: #fff;
       padding: 10px;
       border: none;
       border-radius: 4px;
       cursor: pointer;
-  }
+    }
   
   button:hover {
-      background-color: #45a049;
+      background-color: #333;
   }
   
   p {
@@ -79,12 +80,13 @@ template.innerHTML = /*html*/`
       <label for="password">Password:</label>
       <input type="password" id="password" placeholder="Enter your password" required>
 
-      <label for="password">Confirm Password:</label>
-      <input type="password" id="password" placeholder="Enter your password" required>
-
+    
+      <label for="confirmPassword">Confirm Password:</label>
+      <input type="password" id="confirmPassword" placeholder="Confirm your password" required>
+      
       <button id="registerButton">Register</button>
   
-      <p>Yoou already have an account? <button id="loginbtn">Login</button></p>
+      <p>You already have an account? <button id="login">Login</button></p>
     </div>
   </div>
       `;
@@ -107,17 +109,36 @@ class app extends HTMLElement {
        
         this.register();
       });
+
+        this.shadowRoot.getElementById("login").addEventListener('mousedown', (e) =>{
+            console.log("btn Clicked")
+            this.ChangePageEvent("login")
+        })
     }
+    ChangePageEvent(id) {
+      this.dispatchEvent(new CustomEvent("ChangePageEvent", {
+        bubbles: true,
+        composed: true,
+        detail: id
   
+      }))
+    }
+
     //register
     async register() {
     
       const emailInput = this.shadowRoot.getElementById('email');
       const passwordInput = this.shadowRoot.getElementById('password');
+      const confirmPasswordInput = this.shadowRoot.getElementById('confirmPassword');
   
       const email = emailInput.value;
       const password = passwordInput.value;
-  
+      const confirmPassword = confirmPasswordInput.value;
+
+      if (password !== confirmPassword) {
+        alert('Wachtwoord en bevestigingswachtwoord komen niet overeen.');
+        return;
+      }
       const url = 'http://linuxmpk.northeurope.cloudapp.azure.com:3000/register';
   
       const data = {
@@ -140,9 +161,13 @@ class app extends HTMLElement {
   
         const responseData = await response.text();
         console.log('Registration successful:', responseData);
+        alert("registratie is gelukt");
+        this.ChangePageEvent("login")
+
         // Voer verdere acties uit na een succesvolle registratie
       } catch (error) {
         console.error('There was a problem with the registration:', error);
+        alert('There was a problem with the registration:', error);
         // Behandel fouten of geef meldingen weer voor de gebruiker bij een mislukte registratie
       }
     };

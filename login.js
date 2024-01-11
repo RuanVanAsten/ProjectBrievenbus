@@ -1,78 +1,78 @@
 
 const template = document.createElement("template");
 template.innerHTML = /*html*/`
-       <style>
-      :host {
-      font-family: Arial, sans-serif;
-    
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      background-color: #f4f4f4;
+  <style>
+    :host {
+    font-family: Arial, sans-serif;
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f4f4f4;
     }
-  .container {
+    .container {
       text-align: center;
       background-color: #fff;
-      border-radius: 8px;
+      border-radius: 10px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       padding: 20px;
-  }
-  
-  .logo {
+      margin-top: 80px;
+    }
+    
+    .logo {
       width: 100px;
       margin-bottom: 20px;
-  }
-  
-  .form-container {
+    }
+    
+    .form-container {
       max-width: 300px;
       margin: 0 auto;
-  }
-  
-  label {
+    }
+    
+    label {
       display: block;
       margin-bottom: 8px;
-  }
-  
-  input {
+    }
+    
+    input {
       width: 100%;
       padding: 8px;
       margin-bottom: 16px;
       box-sizing: border-box;
       border: 1px solid #ccc;
       border-radius: 4px;
-  }
-  
-  button {
-      background-color: #4caf50;
+    }
+    
+    button {
+      background-color: #555;
       color: #fff;
       padding: 10px;
       border: none;
       border-radius: 4px;
       cursor: pointer;
-  }
-  
-  button:hover {
-      background-color: #45a049;
-  }
-  
-  p {
+    }
+    
+    button:hover {
+      background-color: #333;
+    }
+    
+    p {
       margin-top: 16px;
-  }
-  
-  a {
-      color: #007bff;
-      text-decoration: none;
-  }
-  
-  a:hover {
-      text-decoration: underline;
-  }
-  #registerknop
-  {
-    color: blue;
-  }
-      </style>
+    }
+    
+    
+    #registerknop
+    {
+      color: blue;
+    }
+    #logoutButton{
+      
+      display: block;
+      margin-bottom: 8px;
+      color: red;
+    }
+  </style>
       
       
   <div class="container">
@@ -87,6 +87,7 @@ template.innerHTML = /*html*/`
       <button id="loginButton">Inloggen</button>
   
       <p>Don't have an account? <button id="register">Register</button></p>
+      <button id="logoutButton">Uitloggen</button>
     </div>
   </div>
       `;
@@ -96,11 +97,11 @@ class app extends HTMLElement {
     super();
 
     
-    const shadow= this.attachShadow({ mode: 'open' });
-    shadow.appendChild(template.content.cloneNode(true));
-
-    this.button = this.shadowRoot.querySelectorAll("button");
-
+    this.shadow = this.attachShadow({mode: "open"}) 
+    this.shadow.append(template.content.cloneNode(true))
+    
+    this.button = this.shadowRoot.querySelectorAll("button")
+    this.isAuthenticated = false; 
     // Voeg stijlen toe aan het Shadow DOM
     
   }
@@ -114,16 +115,39 @@ class app extends HTMLElement {
     this.login();
     });
 
-      this.register();   
-    
-  }
-  ChanePageEvent(id) {
-    this.dispatchEvent(new CustomEvent("ChangePageEvent", {
-      bubbles: true,
-      composed: true,
-      detail: id
+    this.shadowRoot.getElementById('logoutButton').addEventListener('click', () => {
+      this.logout();
+    });
 
-    }))
+    this.shadowRoot.getElementById("register").addEventListener('mousedown', (e) =>{
+          console.log("btn Clicked")
+          this.ChangePageEvent("register")
+      })
+  ;
+  }
+
+    ChangePageEvent(id) {
+      if (id === "history") {
+        // Voeg hier je autorisatiecontrole toe
+        if (this.isAuthenticated) {
+          this.dispatchEvent(new CustomEvent("ChangePageEvent", {
+            bubbles: true,
+            composed: true,
+            detail: id
+          }));
+        } else {
+          console.log('Je hebt geen autorisatie voor de History-pagina.');
+          // Voeg hier eventueel een melding toe aan de gebruiker dat ze geen toegang hebben
+        }
+      }
+      else{
+        this.dispatchEvent(new CustomEvent("ChangePageEvent", {
+          bubbles: true,
+          composed: true,
+          detail: id
+
+        }));
+      }
 
   }
 
@@ -158,17 +182,31 @@ class app extends HTMLElement {
     
         const responseData = await response.text();
         console.log('Login successful:', responseData);
+        alert('Login successful');
+                                    
+        this.setInlogStatus(true);
+        this.ChangePageEvent("history")
+     
+        
         
       } catch (error) {
         console.error('There was a problem with the login:', error);
 
       }
     }
-    
+    logout() {
+      this.setInlogStatus(false);
+      console.log('Logout successful');
+      alert('Logout successful');
+    }
+    setInlogStatus(isAuthenticated) {
+      this.isAuthenticated = isAuthenticated;
+      this.dispatchEvent(new CustomEvent("InlogStatusChanged", {
+        bubbles: true,
+        composed: true,
+        detail: isAuthenticated
+      }));
+    }
     
     }
-
-
-  
-  
   customElements.define('login-comp', app);

@@ -1,3 +1,5 @@
+import "./login.js"
+
 const template = document.createElement("template");
 template.innerHTML = /*html*/`
   <style>
@@ -22,6 +24,7 @@ template.innerHTML = /*html*/`
       width: 90vw;
       height: 40vh;
       margin-bottom: 20px;
+      overflow-y: auto;
     }
 
     input {
@@ -34,7 +37,7 @@ template.innerHTML = /*html*/`
     }
 
     button {
-      background-color: #ff0000;
+      background-color: #555;
       color: #fff;
       padding: 10px;
       border: none;
@@ -43,7 +46,7 @@ template.innerHTML = /*html*/`
     }
 
     button:hover {
-      background-color: #cc0000; /* Darker red on hover */
+      background-color: #333; /* Darker red on hover */
     }
   </style>
 
@@ -103,6 +106,8 @@ class app extends HTMLElement {
         this.dataMessages = data;
   
         this.addToList(selectElement, data);
+
+        selectElement.scrollTop = selectElement.scrollHeight;
       })
       .catch(error => {
         console.error('There was a problem fetching the data:', error);
