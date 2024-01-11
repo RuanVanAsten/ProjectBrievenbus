@@ -10,7 +10,7 @@ const template = document.createElement("template");
 
 template.innerHTML = /*html*/ `
     <header-comp></header-comp>
-    <home-comp></home-comp>
+    
     <footer-comp></footer-comp>
     
     <div id="mainPage">
@@ -29,17 +29,14 @@ class app extends HTMLElement
         this.currentPage = "";
         this.mainPage = this.shadowRoot.querySelector("#mainPage");
     }
-
     ChangePageEvent(e){
         console.log("btnPress Received " + e.detail);
 
         this.showPages(e.detail);
     }
-
     connectedCallback(){
         this.addEventListener("ChangePageEvent", this.ChangePageEvent);
     }
-
     showPages(page)
     {
         console.log(page);

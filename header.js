@@ -32,17 +32,14 @@ template.innerHTML = /*html*/`
             <button id="register">Register</button>
             <button id="home">Home</button>
             <button id="history">History</button>
-            <button id="contact">Contact</button
+            <button id="contact">Contact</button>
         </nav>
     </div>
 `;    
 
-
-
 class app extends HTMLElement {
     constructor(){
         super();
-
         this.shadow = this.attachShadow({mode: "open"}) 
         this.shadow.append(template.content.cloneNode(true))
         
@@ -55,7 +52,6 @@ class app extends HTMLElement {
         this.isAuthenticated = event.detail;
         });
     }
-
     connectedCallback()
     {
         this.button.forEach(btn => {
@@ -65,10 +61,8 @@ class app extends HTMLElement {
             })
         });
     }
-
     ChangePageEvent(id){
         if (id === "history") {
-            // Voeg hier je autorisatiecontrole toe
             if (this.isAuthenticated) {
               this.dispatchEvent(new CustomEvent("ChangePageEvent", {
                 bubbles: true,
@@ -78,7 +72,6 @@ class app extends HTMLElement {
             } else {
               console.log('Je hebt geen autorisatie voor de History-pagina.');
               alert('Je hebt geen autorisatie voor de History-pagina.');
-             
             }
         } 
         else{

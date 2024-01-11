@@ -16,7 +16,7 @@ class app extends HTMLElement {
         }
       </style>
       <div>
-        Project Brievenbus
+       Project Brievenbus 
       </div>
     `;
     }

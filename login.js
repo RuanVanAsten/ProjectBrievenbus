@@ -101,24 +101,17 @@ class app extends HTMLElement {
     this.button = this.shadowRoot.querySelectorAll("button")
     this.isAuthenticated = false; 
   }
-  
-  
   connectedCallback() 
   {
-    this.shadowRoot.getElementById('loginButton').addEventListener('click', () => {
-      this.login();
-    });
+    this.shadowRoot.getElementById('loginButton').addEventListener('click', () => { this.login(); });
 
-    this.shadowRoot.getElementById('logoutButton').addEventListener('click', () => {
-      this.logout();
-    });
-
+    this.shadowRoot.getElementById('logoutButton').addEventListener('click', () => {this.logout(); });
+     
     this.shadowRoot.getElementById("register").addEventListener('mousedown', (e) =>{
       console.log("btn Clicked")
       this.ChangePageEvent("register")
     });
   }
-
   ChangePageEvent(id) {
     if (id === "history") {  
       if (this.isAuthenticated) {
@@ -127,17 +120,13 @@ class app extends HTMLElement {
           composed: true,
           detail: id
         }));
-      } else {
-          console.log('Je hebt geen autorisatie voor de History-pagina.');
-          
-      }
+      } else {console.log('Je hebt geen autorisatie voor de History-pagina.'); 
+        }
     }
-    else{
-      this.dispatchEvent(new CustomEvent("ChangePageEvent", {
+    else{this.dispatchEvent(new CustomEvent("ChangePageEvent", {
         bubbles: true,
         composed: true,
         detail: id
-
       }));
     }
   }
