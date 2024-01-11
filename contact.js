@@ -68,7 +68,7 @@ class app extends HTMLElement {
    
     connectedCallback() {
     }
-    ChanePageEvent(id) {
+    ChangePageEvent(id) {
         this.dispatchEvent(new CustomEvent("ChangePageEvent", {
             bubbles: true,
             composed: true,

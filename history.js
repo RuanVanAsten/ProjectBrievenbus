@@ -125,9 +125,12 @@ class app extends HTMLElement {
       const date = dateObj.toISOString().split('T')[0];
 
       const time = dateObj.toTimeString().split(' ')[0];
-
-      option.textContent = `Message: ${delivery.Post} - Delivered on ${date} at ${time}`;
+      const batterystate = delivery.BatteryState;
+      
+      option.textContent = `Message: ${delivery.Post} - Delivered on ${date} at ${time} - Batterypercentage: ${batterystate} `;
       selectElement.appendChild(option);
+
+      console.log(batterystate);
     });
   }
 

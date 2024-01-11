@@ -92,86 +92,77 @@ template.innerHTML = /*html*/`
       `;
 
 class app extends HTMLElement {
-    constructor() {
-      super();
-  
-     
+  constructor() {
+    super();
       const shadow = this.attachShadow({ mode: 'open' });
       shadow.appendChild(template.content.cloneNode(true));
-      
-      
-    }
-  
-   
-    connectedCallback() {
-     
-      this.shadowRoot.getElementById('registerButton').addEventListener('click', () => {
-       
-        this.register();
-      });
+  }
+  connectedCallback() {
+    this.shadowRoot.getElementById('registerButton').addEventListener('click', () => {
+      this.register();
+    });
 
-        this.shadowRoot.getElementById("login").addEventListener('mousedown', (e) =>{
-            console.log("btn Clicked")
-            this.ChangePageEvent("login")
-        })
-    }
-    ChangePageEvent(id) {
-      this.dispatchEvent(new CustomEvent("ChangePageEvent", {
-        bubbles: true,
-        composed: true,
-        detail: id
-  
-      }))
-    }
+    this.shadowRoot.getElementById("login").addEventListener('mousedown', (e) =>{
+      console.log("btn Clicked")
+      this.ChangePageEvent("login")
+    })
+  }
+  ChangePageEvent(id) {
+    this.dispatchEvent(new CustomEvent("ChangePageEvent", {
+      bubbles: true,
+      composed: true,
+      detail: id
+
+    }))
+  }
 
     //register
-    async register() {
-    
-      const emailInput = this.shadowRoot.getElementById('email');
-      const passwordInput = this.shadowRoot.getElementById('password');
-      const confirmPasswordInput = this.shadowRoot.getElementById('confirmPassword');
+  async register() {
   
-      const email = emailInput.value;
-      const password = passwordInput.value;
-      const confirmPassword = confirmPasswordInput.value;
+    const emailInput = this.shadowRoot.getElementById('email');
+    const passwordInput = this.shadowRoot.getElementById('password');
+    const confirmPasswordInput = this.shadowRoot.getElementById('confirmPassword');
 
-      if (password !== confirmPassword) {
-        alert('Wachtwoord en bevestigingswachtwoord komen niet overeen.');
-        return;
-      }
-      const url = 'http://linuxmpk.northeurope.cloudapp.azure.com:3000/register';
-  
-      const data = {
-        username: email,
-        password: password
-      };
-  
-      try {
-        const response = await fetch(url, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(data)
-        });
-  
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-  
-        const responseData = await response.text();
-        console.log('Registration successful:', responseData);
-        alert("registratie is gelukt");
-        this.ChangePageEvent("login")
+    const email = emailInput.value;
+    const password = passwordInput.value;
+    const confirmPassword = confirmPasswordInput.value;
 
-        // Voer verdere acties uit na een succesvolle registratie
-      } catch (error) {
-        console.error('There was a problem with the registration:', error);
-        alert('There was a problem with the registration:', error);
-        // Behandel fouten of geef meldingen weer voor de gebruiker bij een mislukte registratie
-      }
+    if (password !== confirmPassword) {
+      alert('Wachtwoord en bevestigingswachtwoord komen niet overeen.');
+      return;
+    }
+    const url = 'http://linuxmpk.northeurope.cloudapp.azure.com:3000/register';
+
+    const data = {
+      username: email,
+      password: password
     };
+
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const responseData = await response.text();
+      console.log('Registration successful:', responseData);
+      alert("registratie is gelukt");
+      this.ChangePageEvent("login")
+
+   
+    } catch (error) {
+      console.error('There was a problem with the registration:', error);
+      alert('There was a problem with the registration:', error);
+    
+    }
+  };
   }
-  
   
 customElements.define('register-comp', app);

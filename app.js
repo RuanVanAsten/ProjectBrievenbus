@@ -6,12 +6,11 @@ import "./history.js"
 import "./contact.js"
 import "./home.js"
 
-
 const template = document.createElement("template");
 
 template.innerHTML = /*html*/ `
     <header-comp></header-comp>
-   
+    <home-comp></home-comp>
     <footer-comp></footer-comp>
     
     <div id="mainPage">
@@ -45,17 +44,13 @@ class app extends HTMLElement
     {
         console.log(page);
         for(let oldPage of this.cachedPages){
-            this.shadowRoot.querySelector(`#${oldPage}`).style.display = "none";
-            
-    }
+            this.shadowRoot.querySelector(`#${oldPage}`).style.display = "none"; 
+        }
 
-    if(this.cachedPages.indexOf(page) !== -1){
-        console.log("i already cached! " + page)
-        
-        this.shadowRoot.querySelector(`#${page}`).style.display = "flex";
-
-
-    }
+        if(this.cachedPages.indexOf(page) !== -1){
+            console.log("i already cached! " + page)  
+            this.shadowRoot.querySelector(`#${page}`).style.display = "flex";
+        }
         else{
             this.cachedPages.push(page) 
             console.log(`${page}`)
@@ -67,12 +62,7 @@ class app extends HTMLElement
 
         }
         console.log(this.cachedPages);
-
-        
-    }
-
-    
-    
+    } 
 }
 
 customElements.define('app-comp', app)

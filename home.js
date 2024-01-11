@@ -35,17 +35,14 @@ template.innerHTML = /*html*/`
     p {
       margin-top: 16px;
     }
-    
-   
-   
   </style>
-      
       
   <div class="container">
   <img src="pigeon.jpg" alt="Logo" class="logo">
     <div class="form-container">
       
-      <p>Dit is ons project brievenbus, waar je kunt inloggen en registreren. <br> Na het inloggen krijg je toegang tot de history pagina, waar je kunt zien of je post hebt ontvangen of niet.</p>
+      <p>Dit is ons project brievenbus, waar je kunt inloggen en registreren. <br> 
+      Na het inloggen krijg je toegang tot de history pagina, waar je kunt zien of je post hebt ontvangen of niet.</p>
     </div>
   </div>
       `;
@@ -53,38 +50,20 @@ template.innerHTML = /*html*/`
 class app extends HTMLElement {
   constructor() {
     super();
-
-    
     const shadow= this.attachShadow({ mode: 'open' });
     shadow.appendChild(template.content.cloneNode(true));
 
     this.button = this.shadowRoot.querySelectorAll("button");
-
-    // Voeg stijlen toe aan het Shadow DOM
-    
   }
-  
-  
-  connectedCallback() 
-  {
-   
-    this.shadowRoot.getElementById('loginButton').addEventListener('click', () => {
-  
-    this.login();
-    });
 
-      
-    
-  }
-  ChanePageEvent(id) {
+  ChangePageEvent(id) {
     this.dispatchEvent(new CustomEvent("ChangePageEvent", {
       bubbles: true,
       composed: true,
       detail: id
 
     }))
-
   }
-    
-    }
-  customElements.define('home-comp', app);
+}
+
+customElements.define('home-comp', app);
