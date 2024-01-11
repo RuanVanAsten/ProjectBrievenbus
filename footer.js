@@ -1,11 +1,7 @@
 class app extends HTMLElement {
     constructor() {
         super();
-
-        // Creëer een Shadow DOM
         this.attachShadow({ mode: 'open' });
-
-        // Voeg stijlen toe aan het Shadow DOM
         this.shadowRoot.innerHTML = /*html*/`
       <style>
         :host {
@@ -26,5 +22,4 @@ class app extends HTMLElement {
     }
 }
 
-// Registreer het aangepaste footercomponent
 customElements.define('footer-comp', app);

@@ -106,9 +106,20 @@ class app extends HTMLElement {
     this.shadowRoot.getElementById('submitBtn').addEventListener('click', this.handleSubmit.bind(this));
   }
 
+<<<<<<< HEAD
   handleSubmit() {
     const form = this.shadowRoot.getElementById('contactForm');
     const formData = new FormData(form);
+=======
+   
+    connectedCallback() {
+    }
+    ChangePageEvent(id) {
+        this.dispatchEvent(new CustomEvent("ChangePageEvent", {
+            bubbles: true,
+            composed: true,
+            detail: id
+>>>>>>> 337bd4c8c61aadd3a4a193dc82d96781e26d46fe
 
     const name = formData.get('name');
     const email = formData.get('email');
