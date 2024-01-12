@@ -61,5 +61,4 @@ class app extends HTMLElement
         console.log(this.cachedPages);
     } 
 }
-
 customElements.define('app-comp', app)

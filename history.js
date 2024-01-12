@@ -1,4 +1,4 @@
-import "./login.js"
+
 
 const template = document.createElement("template");
 template.innerHTML = /*html*/`
@@ -62,18 +62,15 @@ class app extends HTMLElement {
   constructor() {
     super();
     const shadow = this.attachShadow({ mode: 'open' });
-    const dataMessages = [];
+    //const dataMessages = [];
 
     shadow.appendChild(template.content.cloneNode(true));
 
-    // Add event listener to the delete button
     const deleteButton = shadow.getElementById('deleteButton');
     deleteButton.addEventListener('click', this.deleteSelectedOption.bind(this));
 
-    // Add event listener to the clear button
     const clearButton = shadow.getElementById('clearButton');
     clearButton.addEventListener('click', this.clearDateInput.bind(this));
-
 
     //date
     const dateInput = shadow.getElementById('dateInput');
@@ -126,7 +123,7 @@ class app extends HTMLElement {
 
       const time = dateObj.toTimeString().split(' ')[0];
       const batterystate = delivery.BatteryState;
-      
+
       option.textContent = `Message: ${delivery.Post} - Delivered on ${date} at ${time} - Batterypercentage: ${batterystate} `;
       selectElement.appendChild(option);
 
